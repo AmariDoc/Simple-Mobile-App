@@ -8,5 +8,4 @@ A basic React Native mobile application demonstrating:
 - State management using useState  
 - Basic layout and styling  
 
-## How to Run the App
 
