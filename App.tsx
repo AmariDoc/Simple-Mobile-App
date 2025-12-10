@@ -1,118 +1,90 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-import type {PropsWithChildren} from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
   Text,
-  useColorScheme,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+export default function App() {
+  const [name, setName] = useState('');
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+  const handlePress = () => {
+    if (name.trim() === '') {
+      Alert.alert('Hold up 👀', 'Type something first.');
+      return;
+    }
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    Alert.alert('AmariiDoc App Says:', `🔥 ${name} 🔥`);
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.title}>AmariiDoc Mobile 🔥</Text>
+      <Text style={styles.subtitle}>Enter something below:</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Type here..."
+        placeholderTextColor="#aaa"
+        value={name}
+        onChangeText={setName}
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
+
+      <TouchableOpacity style={styles.button} onPress={handlePress}>
+        <Text style={styles.buttonText}>Show Alert</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    backgroundColor: '#0a0f24',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+
+  title: {
+    fontSize: 32,
+    color: '#fff',
+    fontWeight: '700',
+    marginBottom: 8,
   },
-  sectionDescription: {
-    marginTop: 8,
+
+  subtitle: {
     fontSize: 18,
-    fontWeight: '400',
+    color: '#bbb',
+    marginBottom: 20,
   },
-  highlight: {
+
+  input: {
+    width: '90%',
+    backgroundColor: '#1a2036',
+    padding: 15,
+    borderRadius: 10,
+    color: '#fff',
+    fontSize: 18,
+    borderColor: '#4e6bff',
+    borderWidth: 1,
+  },
+
+  button: {
+    marginTop: 25,
+    backgroundColor: '#4e6bff',
+    paddingVertical: 15,
+    paddingHorizontal: 60,
+    borderRadius: 12,
+  },
+
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
     fontWeight: '700',
   },
 });
-
-export default App;
